@@ -1,0 +1,8 @@
+.clock-container {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .clock {
+     margin-bottom: 10px;
+ } 
