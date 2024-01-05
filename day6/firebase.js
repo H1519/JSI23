@@ -1,15 +1,25 @@
-// Cập nhật phiên bản Firebase SDK
+// Import các hàm bạn cần từ các SDK bạn muốn sử dụng
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
 import {
-      getDatabase,
-      set, 
-      ref, 
-      onValue,
-      update,
-      remove,
-      get,
+  getStorage,
+  uploadBytes,
+  getDownloadURL,
+  ref,
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
+import {
+  get,
+  getDatabase,
+  set,
+  ref as dbRef,
+  onValue,
+  update,
+  remove,
+  child,
+  push, // Chuyển dòng import này từ firebase-storage.js sang firebase-database.js
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 
+
+// ... (phần còn lại của mã nguồn của bạn vẫn giữ nguyên)
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -18,6 +28,7 @@ import {
 const firebaseConfig = {
   apiKey: "AIzaSyAeDqu_I1NKuYxCM-JDEg3F_nrXCiOgRzw",
   authDomain: "jsb23-ab6d5.firebaseapp.com",
+  databaseURL: "https://jsb23-ab6d5-default-rtdb.firebaseio.com",
   projectId: "jsb23-ab6d5",
   storageBucket: "jsb23-ab6d5.appspot.com",
   messagingSenderId: "733919925100",
@@ -27,98 +38,95 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
 const database = getDatabase(app);
-
-let username_input = document.getElementById("user_name");
-let userage_input = document.getElementById("user_age");
+let user_name_input = document.getElementById("user_name");
+let user_age_input = document.getElementById("user_age");
+let user_favor_input = document.getElementById("user_favor");
 let add_user_btn = document.getElementById("add_user");
 let read_data = document.getElementById("read_data");
-let user_favor_input = document.getElementById("user_favor");
-let update_btn = document.getElementById("up_date");
-let delete_btn =document.getElementById("delete");
-add_user_btn.addEventListener("click", function () {
-     const newUsername = username_input.value;
-     const userRef = ref(database, 'users/' + newUsername);
-   
-     // Kiểm tra xem tên người dùng đã tồn tại hay chưa
-     get(userRef).then((snapshot) => {
-       if (!snapshot.exists()) {
-         // Tên người dùng chưa tồn tại, thêm vào cơ sở dữ liệu
-         set(userRef, {
-           username: newUsername,
-           userage: userage_input.value,
-         });
-         console.log(`User '${newUsername}' đã được tạo mới thành công.`);
-       } else {
-         // Tên người dùng đã tồn tại
-         console.log(`Tên người dùng '${newUsername}' đã tồn tại. Không thể tạo mới.`);
-       }
-     });
-   
-     // Reset giá trị nhập liệu
-     username_input.value = "";
-     userage_input.value = "";
-     user_favor_input.value = "";
-   });
-   
+let update_btn = document.getElementById("update");
+let delete_btn = document.getElementById("delete");
 
-//read
-read_data.addEventListener("click",function(){
-     onValue(ref(database, "users"), (snap) =>{
-          let data = snap.val();
-          console.log(data);
-          });
-          username_input.value="";
-          userage_input.value="";
-          user_favor_input.value="";
+// Create
+add_user_btn.addEventListener("click", function () {
+  // let userRef = ref(database, "users/" + user_name_input.value);
+
+  const dbRef = ref(getDatabase());
+
+  get(child(dbRef, `users/${user_name_input.value}`)).then((snapshot) => {
+    // nếu tên người dùng bạn nhập trùng với tên có rồi trong firebase thì snap.exists() == true
+    // => Lúc này mình thể add 1 user có tên như vậy nữa
+    // nếu tên người dùng bạn nhập trùng ko với tên có rồi trong firebase thì snap.exists() == false
+    // => Cho phép user đó đc add vào trong firebase
+    if (snapshot.exists() == false) {
+      set(ref(database, "users/" + user_name_input.value), {
+        username: user_name_input.value,
+        userage: user_age_input.value,
+      });
+
+      alert("Tạo tài khoản thành công");
+    } else {
+      alert("Tên này đã được sử dụng, vui lòng nhập tên khác");
+      // alert(snapshot.val());
+    }
+  });
+});
+
+// Read
+read_data.addEventListener("click", function () {
+  onValue(ref(database, "users"), (snap) => {
+    let data = snap.val();
+    console.log(data);
+  });
 });
 
 // Update
-update_btn.addEventListener("click",function(){
-     const newUsername = username_input.value;
-     const userRef = ref(database, 'users/' + newUsername);
-   
-     // Kiểm tra xem tên người dùng đã tồn tại hay chưa
-     get(userRef).then((snapshot) => {
-       if (!snapshot.exists()) {
-         // Tên người dùng chưa tồn tại, thêm vào cơ sở dữ liệu
-         set(userRef, {
-           username: newUsername,
-           userage: userage_input.value,
-         });
-         console.log(`User '${newUsername}' đã được tạo mới thành công.`);
-       } else {
-         // Tên người dùng đã tồn tại
-         console.log(`Tên người dùng '${newUsername}' đã tồn tại. Không thể tạo mới.`);
-       }
-     });
-     update(ref(database, "users/"+ username_input.value),{
-          user_favor: user_favor_input.value
-     })
-     username_input.value="";
-     userage_input.value="";
-     user_favor_input.value="";
+update_btn.addEventListener("click", function () {
+  update(ref(database, "users/" + user_name_input.value), {
+    userfavor: user_favor_input.value,
+  });
 });
-//delete
-delete_btn.addEventListener("click",function(){
-     const newUsername = username_input.value;
-     const userRef = ref(database, 'users/' + newUsername);
-   
-     // Kiểm tra xem tên người dùng đã tồn tại hay chưa
-     get(userRef).then((snapshot) => {
-       if (!snapshot.exists()) {
-         // Tên người dùng chưa tồn tại, thêm vào cơ sở dữ liệu
-         set(userRef, {
 
-         });
-         console.log(`User '${newUsername}' không tồn tại.`);
-       } else {
-         // Tên người dùng đã tồn tại
-         console.log(`Tên người dùng '${newUsername}' xóa thành công.`);
-       }
-     });
-     remove(ref(database, "users/"+username_input.value));
-     username_input.value="";
-     userage_input.value="";
-     user_favor_input.value="";
-})
+// Delete
+delete_btn.addEventListener("click", function () {remove(ref(database, "users/" + user_name_input.value));
+});
+
+////////////////////////////////////////////////////////// upload image
+// upload image
+const fileInput = document.getElementById("fileInput"); // Input element for file selection
+const imageGallery = document.getElementById("imageGallery"); // Container for displaying images
+var file = "";
+
+fileInput.addEventListener("change", async function (e) {
+  file = e.target.files[0]; // Get the selected file
+});
+
+
+let upload_image_btn = document.getElementById("uploadImage");
+upload_image_btn.addEventListener("click", async function () {
+  // Create a storage reference
+  const storageRef = ref(storage, "images/" + file.name);
+  try {
+    // Upload file to Firebase Storage
+    const snapshot = await uploadBytes(storageRef, file);
+    // Get the download URL after successful upload
+    const downloadURL = await getDownloadURL(snapshot.ref);
+    console.log(downloadURL);
+    // Store downloadURL in Firebase Database for retrieval
+    const dbImagesRef = dbRef(database, "images");
+    push(dbImagesRef, {
+      imageURL: downloadURL,
+    });
+    // Display images
+    let img = document.createElement("img");
+    img.src = downloadURL;
+    img.addEventListener("load", function () {
+      // Add the image to the imageGallery when it's loaded
+      imageGallery.appendChild(img);
+    });
+  } catch (error) {
+    // Handle any errors while uploading
+    console.error(error);
+  }
+});

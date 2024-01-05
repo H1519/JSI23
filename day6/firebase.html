@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Firebase study</title>
-</head>
-<body>
-     <input type="text" placeholder="user_name" id="user_name" />
-     <input type="text" placeholder="user_age" id="user_age" />
-     <input type="text" placeholder="user_favor" id="user_favor">
-     <button id="add_user">Add</button>
-     <button id="read_data">Read</button>
-     <button id="up_date">Update</button>
-     <button id="delete">delete</button>
-     <script type ="module" src="./firebase.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase study</title>
+  </head>
+  <body>
+    <input type="text" placeholder="username" id="user_name" />
+    <input type="text" placeholder="userage" id="user_age" />
+    <input type="text" placeholder="userfavor" id="user_favor" />
+    <button id="add_user">Add</button>
+    <button id="read_data">Read</button>
+    <button id="update">Update</button>
+    <button id="delete">Delete</button>
+
+    <h2>Image Upload</h2>
+
+    <!-- Input for selecting image -->
+    <input type="file" id="fileInput" accept="image/*" />
+    <button id="uploadImage">Upload Image</button>
+    <!-- Display uploaded images -->
+    <div id="imageGallery"></div>
+    <script type="module" src="./firebase.js"></script>
+  </body>
 </html>
