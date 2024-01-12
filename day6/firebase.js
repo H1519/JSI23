@@ -47,50 +47,7 @@ let add_user_btn = document.getElementById("add_user");
 let read_data = document.getElementById("read_data");
 let update_btn = document.getElementById("update");
 let delete_btn = document.getElementById("delete");
-
-// Create
-add_user_btn.addEventListener("click", function () {
-  // let userRef = ref(database, "users/" + user_name_input.value);
-
-  const dbRef = ref(getDatabase());
-
-  get(child(dbRef, `users/${user_name_input.value}`)).then((snapshot) => {
-    // nếu tên người dùng bạn nhập trùng với tên có rồi trong firebase thì snap.exists() == true
-    // => Lúc này mình thể add 1 user có tên như vậy nữa
-    // nếu tên người dùng bạn nhập trùng ko với tên có rồi trong firebase thì snap.exists() == false
-    // => Cho phép user đó đc add vào trong firebase
-    if (snapshot.exists() == false) {
-      set(ref(database, "users/" + user_name_input.value), {
-        username: user_name_input.value,
-        userage: user_age_input.value,
-      });
-
-      alert("Tạo tài khoản thành công");
-    } else {
-      alert("Tên này đã được sử dụng, vui lòng nhập tên khác");
-      // alert(snapshot.val());
-    }
-  });
-});
-
-// Read
-read_data.addEventListener("click", function () {
-  onValue(ref(database, "users"), (snap) => {
-    let data = snap.val();
-    console.log(data);
-  });
-});
-
-// Update
-update_btn.addEventListener("click", function () {
-  update(ref(database, "users/" + user_name_input.value), {
-    userfavor: user_favor_input.value,
-  });
-});
-
-// Delete
-delete_btn.addEventListener("click", function () {remove(ref(database, "users/" + user_name_input.value));
-});
+let user_avata = document.getElementById("user_avata");
 
 ////////////////////////////////////////////////////////// upload image
 // upload image
@@ -123,6 +80,8 @@ upload_image_btn.addEventListener("click", async function () {
     img.src = downloadURL;
     img.addEventListener("load", function () {
       // Add the image to the imageGallery when it's loaded
+      img.style.width = "100px";
+      img.style.height = "100px";
       imageGallery.appendChild(img);
     });
   } catch (error) {
@@ -130,3 +89,55 @@ upload_image_btn.addEventListener("click", async function () {
     console.error(error);
   }
 });
+    
+// Create
+    add_user_btn.addEventListener("click", function () {
+      // let userRef = ref(database, "users/" + user_name_input.value);
+    
+      const dbRef = ref(getDatabase());
+    
+      get(child(dbRef, `users/${user_name_input.value}`)).then((snapshot) => {
+        // nếu tên người dùng bạn nhập trùng với tên có rồi trong firebase thì snap.exists() == true
+        // => Lúc này mình thể add 1 user có tên như vậy nữa
+        // nếu tên người dùng bạn nhập trùng ko với tên có rồi trong firebase thì snap.exists() == false
+        // => Cho phép user đó đc add vào trong firebase
+        if (snapshot.exists() == false) {
+          set(ref(database, "users/" + user_name_input.value), {
+            username: user_name_input.value,
+            userage: user_age_input.value,
+            useravata: user_avata.value,
+          });
+    
+          alert("Tạo tài khoản thành công");
+        } else {
+          alert("Tên này đã được sử dụng, vui lòng nhập tên khác");
+          // alert(snapshot.val());
+        }
+      });
+    });
+    
+    // Read
+    read_data.addEventListener("click", function () {
+      onValue(ref(database, "users"), (snap) => {
+        let data = snap.val();
+        console.log(data);
+        
+        if(data && data.user_avata){
+          document.getElementById(
+            "imageGallery"
+            ).style.backgroundImage = `url("${data.user_avata}")`;
+        }
+      });
+    });
+    
+    // Update
+    update_btn.addEventListener("click", function () {
+
+      update(ref(database, "users/" + user_name_input.value), {
+        userfavor: user_favor_input.value,
+      });
+    });
+    
+    // Delete
+    delete_btn.addEventListener("click", function () {remove(ref(database, "users/" + user_name_input.value));
+    });

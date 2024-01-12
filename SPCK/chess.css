@@ -1,0 +1,79 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+#chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 50px);
+    grid-template-rows: repeat(8, 50px);
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.white.pawn {
+    background-image: url('./wikipedia/wP.png');
+}
+
+.white.rook {
+    background-image: url('./wikipedia/wR.png');
+}
+
+.white.knight {
+    background-image: url('./wikipedia/wN.png');
+}
+
+.white.bishop {
+    background-image: url('./wikipedia/wB.png');
+}
+
+.white.queen {
+    background-image: url('./wikipedia/wQ.png');
+}
+
+.white.king {
+    background-image: url('./wikipedia/wK.png');
+}
+.black.pawn {
+    background-image: url('./wikipedia/bP.png');
+}
+
+.black.rook {
+    background-image: url('./wikipedia/bR.png');
+}
+
+.black.knight {
+    background-image: url('./wikipedia/bN.png');
+}
+
+.black.bishop {
+    background-image: url('./wikipedia/bB.png');
+}
+
+.black.queen {
+    background-image: url('./wikipedia/bQ.png');
+}
+
+.black.king {
+    background-image: url('./wikipedia/bK.png');
+}
+
+/* Áp dụng màu nền cho tất cả các quân cờ */
+.pawn,
+.rook,
+.knight,
+.bishop,
+.queen,
+.king {
+    background-color: transparent; /* Màu nền trong suốt */
+}
