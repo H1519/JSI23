@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Web Giới Thiệu</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    section {
+      text-align: center;
+      margin: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Chào mừng bạn đến với Trang Web Giới Thiệu Về Game</h1>
+  </header>
+
+  <section>
+    <p>Chúng tôi là một trang web tuyệt vời mang đến cho bạn những trải nghiệm thú vị.</p>
+    <!-- Đổi thành thẻ video để hiển thị video -->
+    <video width="100%" height="auto" autoplay loop muted>
+      <source src="https://kenh14cdn.com/203336854389633024/2020/12/6/photo-4-16072318234722139735738.gif.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <p>Hãy đăng nhập hoặc đăng ký để bắt đầu!</p>
+    <button onclick="redirectToLogin()">Đăng Nhập</button>
+    <button onclick="redirectToRegister()">Đăng Ký</button>
+  </section>
+
+  <script>
+    function redirectToLogin() {
+     window.location.href = "http://127.0.0.1:5500/SPCK/login&register/login.html";
+      alert("Chuyển hướng đến trang đăng nhập");
+    }
+
+    function redirectToRegister() {
+      // Sử dụng window.location.href để chuyển hướng
+      window.location.href = "http://127.0.0.1:5500/SPCK/login&register/register.html";
+      alert("Chuyển hướng đến trang đăng ký");
+    }
+  </script>
+
+</body>
+</html>

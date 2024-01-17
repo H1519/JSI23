@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="app.js"></script>
+  <script defer src="diceModule.js"></script>
+  <title>Trò chơi Snake and Ladder</title>
+</head>
+<body>
+
+  <header>
+    <h1>Chào mừng bạn đến với Trò chơi Snake and Ladder</h1>
+  </header>
+
+  <section id="game-container">
+    <div id="main"></div>
+    <div id="dice-container" class="dice-container"></div>
+    <button id="startButton">Bắt đầu trò chơi</button>
+  </section>
+
+  <script>
+    document.getElementById("startButton").addEventListener("click", function () {
+      startGame();
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+#main {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  background-color: khaki;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+#dice-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.dice {
+  font-size: 3em;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  background-color: khaki;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.player1 {
+  background-color: blue;
+}
+
+.player2 {
+  background-color: red;
+}
