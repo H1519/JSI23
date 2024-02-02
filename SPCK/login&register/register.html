@@ -9,18 +9,18 @@
 <body>
     <form>
         <label for="user_name">Tên người dùng:</label>
-        <input type="text" id="user_name">
+        <input type="text" id="user_name" required>
 
         <label for="password">Mật khẩu:</label>
-        <input type="password" id="password">
+        <input type="password" id="password" required>
 
         <label for="avatar_input">Chọn ảnh đại diện:</label>
         <input type="file" id="avatar_input" accept="image/*" style="display: none;">
         <label class="custom-file-upload" for="avatar_input">Chọn ảnh đại diện</label>
 
-        <button id="add_user_btn">Thêm Người Dùng</button>
-        <button><a href="./login.html"style="text-decoration: none;">Bạn Đã Có Tài Khoản?</a></button>
-    <button><a href="./CK.html"style="text-decoration: none;">Quay Lại Trang Chủ</a></button>
+        <button type="button" id="add_user_btn">Thêm Người Dùng</button>
+        <button type="button" onclick="location.href='./login.html'">Bạn Đã Có Tài Khoản?</button>
+        <button type="button" onclick="location.href='SPCK/main/index.html'">Quay Lại Trang Chủ</button>
     </form>
 
     <script type="module" src="./register.js"></script>

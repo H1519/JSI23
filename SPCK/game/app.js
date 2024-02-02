@@ -1,53 +1,237 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const main = document.getElementById("main");
-  const startButton = document.getElementById("startButton");
+let tog = 1
+let n = 0;
+let nn = 0;
+let P1 = document.createElement("input");
+let P2 = document.createElement("input");
+let scocer = document.createElement("h1");
+let p1sum = 0
+let p2sum = 0
 
-  // Khởi tạo vị trí của 2 nhân vật
-  let player1Position = 1;
-  let player2Position = 1;
 
-  startButton.addEventListener("click", startGame);
+function play(player, psum, correction, num) {
+    let sum
+    if (psum == 'p1sum') {
 
-  function startGame() {
-    // Xóa bảng trò chơi cũ và xúc xắc cũ
-    main.innerHTML = "";
-    const diceContainer = document.getElementById("dice-container");
-    diceContainer.innerHTML = "";
+        p1sum = p1sum + num
 
-    // Tạo bảng trò chơi
-    const rows = 6;
-    const columns = 10;
-
-    for (let i = 0; i < rows; i++) {
-      let row = document.createElement("div");
-      row.classList.add("row");
-
-      for (let j = 0; j < columns; j++) {
-        let cell = document.createElement("div");
-        cell.classList.add("cell");
-
-        // Kiểm tra nếu ô là vị trí của player1 hoặc player2 thì thêm class tương ứng
-        if (player1Position === calculateCellNumber(i, j)) {
-          cell.classList.add("player1");
-        } else if (player2Position === calculateCellNumber(i, j)) {
-          cell.classList.add("player2");
+        if (p1sum > 100) {
+            p1sum = p1sum - num
+            // sum = p1sum
         }
 
-        row.appendChild(cell);
-      }
+        if (p1sum == 1) {
+            p1sum = 38
+        }
+        if (p1sum == 4) {
+            p1sum = 14
+        }
+        if (p1sum == 8) {
+            p1sum = 30
+        }
+        if (p1sum == 21) {
+            p1sum = 42
+        }
+        if (p1sum == 28) {
+            p1sum = 76
+        }
+        if (p1sum == 32) {
+            p1sum = 10
+        }
+        if (p1sum == 36) {
+            p1sum = 6
+        }
+        if (p1sum == 48) {
+            p1sum = 26
+        }
+        if (p1sum == 50) {
+            p1sum = 67
+        }
+        if (p1sum == 62) {
+            p1sum = 18
+        }
+        if (p1sum == 71) {
+            p1sum = 92
+        }
+        if (p1sum == 80) {
+            p1sum = 99
+        }
+        if (p1sum == 88) {
+            p1sum = 24
+        }
+        if (p1sum == 95) {
+            p1sum = 56
+        }
+        if (p1sum == 97) {
+            p1sum = 78
+        }
 
-      main.appendChild(row);
+        sum = p1sum
+
+
+
     }
 
-    // Tạo xúc xắc
-    createDiceContainer("dice-container");
+    if (psum == 'p2sum') {
 
-    // Gọi hàm rollDice khi bắt đầu trò chơi
-    rollDice();
-  }
+        p2sum = p2sum + num
 
-  function calculateCellNumber(row, column) {
-    // Tính số ô tương ứng với vị trí trong bảng
-    return row * 10 + column + 1;
-  }
-});
+        if (p2sum > 100) {
+            p2sum = p2sum - num
+            // sum = p1sum
+        }
+        
+
+        if (p2sum == 1) {
+            p2sum = 38
+        }
+        if (p2sum == 4) {
+            p2sum = 14
+        }
+        if (p2sum == 8) {
+            p2sum = 30
+        }
+        if (p2sum == 21) {
+            p2sum = 42
+        }
+        if (p2sum == 28) {
+            p2sum = 76
+        }
+        if (p2sum == 32) {
+            p2sum = 10
+        }
+        if (p2sum == 36) {
+            p2sum = 6
+        }
+        if (p2sum == 48) {
+            p2sum = 26
+        }
+        if (p2sum == 50) {
+            p2sum = 67
+        }
+        if (p2sum == 62) {
+            p2sum = 18
+        }
+        if (p2sum == 71) {
+            p2sum = 92
+        }
+        if (p2sum == 80) {
+            p2sum = 99
+        }
+        if (p2sum == 88) {
+            p2sum = 24
+        }
+        if (p2sum == 95) {
+            p2sum = 56
+        }
+        if (p2sum == 97) {
+            p2sum = 78
+        }
+
+        sum = p2sum
+
+
+
+    }
+
+
+    document.getElementById(`${player}`).style.transition = `linear all .5s`
+
+
+
+
+
+    if (sum < 10) {
+
+        document.getElementById(`${player}`).style.left = `${(sum - 1) * 62}px`
+        document.getElementById(`${player}`).style.top = `${-0 * 62 - correction}px`
+
+
+    }
+
+    else if (sum == 100) {
+        if (player == 'p1') {
+            alert("P1 Thắng !!")
+            prompt("Nhập tên người chiến thắng");
+        }
+        else if (player == 'p2') {
+            alert("P2 Thắng !!")
+            prompt("Nhập tên người chiến thắng");
+        }
+        let reset = document.createElement("button");
+        reset.innerText = "Chơi lại";
+        reset.addEventListener("click", function(){
+            location.reload();
+        });
+        document.body.appendChild(reset);
+    }
+    else {
+
+        numarr = Array.from(String(sum))
+        n1 = eval(numarr.shift())
+        n2 = eval(numarr.pop())
+        // console.log(n1, n2)
+
+        if (n1 % 2 != 0) {
+
+            if (n2 == 0) {
+                document.getElementById(`${player}`).style.left = `${(9) * 62}px`
+                document.getElementById(`${player}`).style.top = `${(-n1 + 1) * 62 - correction}px`
+            }
+            else {
+                document.getElementById(`${player}`).style.left = `${(9 - (n2 - 1)) * 62}px`
+                document.getElementById(`${player}`).style.top = `${-n1 * 62 - correction}px`
+
+            }
+
+        }
+        else if (n1 % 2 == 0) {
+            if (n2 == 0) {
+
+                document.getElementById(`${player}`).style.left = `${(0) * 62}px`
+                document.getElementById(`${player}`).style.top = `${(-n1 + 1) * 62 - correction}px`
+            }
+            else {
+
+                document.getElementById(`${player}`).style.left = `${(n2 - 1) * 62}px`
+                document.getElementById(`${player}`).style.top = `${-n1 * 62 - correction}px`
+            }
+
+        }
+
+
+
+    }
+}
+
+
+document.getElementById("diceBtn").addEventListener("click", function () {
+    num = Math.floor(Math.random() * (6 - 1 + 1) + 1)
+    document.getElementById("dice").innerText = num
+    n =n+1;
+    if(n == 2){
+        nn = nn+1;
+        n =0;
+        scocer = nn;
+    } 
+   
+    if (tog % 2 != 0) {
+        document.getElementById('tog').innerText = "Yellow's Turn : "
+        play('p1', 'p1sum', 0, num)
+
+    }
+
+    else if (tog % 2 == 0) {
+        document.getElementById('tog').innerText = "Red's Turn : "
+
+        play('p2', 'p2sum', 55, num)
+
+    }
+
+    tog = tog + 1
+
+
+
+    document.body.appendChild("scocer");
+    document.body.appendChild("reset");
+    
+})

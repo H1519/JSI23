@@ -13,13 +13,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
 
 const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_AUTH_DOMAIN",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_STORAGE_BUCKET",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "YOUR_MEASUREMENT_ID"
+    // YOUR FIREBASE CONFIG HERE
 };
 
 const app = initializeApp(firebaseConfig);
@@ -34,23 +28,19 @@ const add_user_btn = document.getElementById("add_user_btn");
 add_user_btn.addEventListener("click", async function () {
     const userRef = dbRef(database, "users/" + user_name_input.value);
 
-    // Get the selected image file
     const avatarFile = avatar_input.files[0];
 
-    if (!avatarFile) {
-        alert("Vui lòng chọn một hình ảnh.");
+    if (!user_name_input.value || !password_input.value || !avatarFile) {
+        alert("Vui lòng điền đầy đủ thông tin và chọn một hình ảnh.");
         return;
     }
 
     try {
-        // Upload the image file to Firebase Storage
         const storageRefPath = storageRef(storage, "avatars/" + user_name_input.value);
         await uploadBytes(storageRefPath, avatarFile);
 
-        // Get the URL of the uploaded image
         const downloadURL = await getDownloadURL(storageRefPath);
 
-        // Save user information to Firebase Realtime Database
         await set(userRef, {
             username: user_name_input.value,
             password: password_input.value,

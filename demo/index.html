@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dice Roller</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show/Hide Div Example</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #hiddenDiv {
+            display: none;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+    <button id="showHideButton">Hiển thị/Ẩn Div</button>
 
-  <div id="dice" class="dice">⚀</div>
-  <button id="rollButton">Roll Dice</button>
+    <div id="hiddenDiv">
+        <p>Nội dung của div nổi lên</p>
+        <h1>hihihi
+        </h1>
+    </div>
 
-  <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
