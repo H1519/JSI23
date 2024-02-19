@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show/Hide Div Example</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        #hiddenDiv {
-            display: none;
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
 </head>
 <body>
-    <button id="showHideButton">Hiển thị/Ẩn Div</button>
+  <h2>Login</h2>
+  <input type="email" id="email1" placeholder="Email 1"><br>
+  <input type="password" id="password1" placeholder="Password 1"><br>
+  <input type="email" id="email2" placeholder="Email 2"><br>
+  <input type="password" id="password2" placeholder="Password 2"><br>
+  <button id="compareBtn">Compare</button>
 
-    <div id="hiddenDiv">
-        <p>Nội dung của div nổi lên</p>
-        <h1>hihihi
-        </h1>
-    </div>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth-compat.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyDTM43DRmlkEGdyWPgBkRSjWyYfIyF5np0",
+    authDomain: "cuoikhoa-82272.firebaseapp.com",
+    databaseURL: "https://cuoikhoa-82272-default-rtdb.firebaseio.com",
+    projectId: "cuoikhoa-82272",
+    storageBucket: "cuoikhoa-82272.appspot.com",
+    messagingSenderId: "88357534559",
+    appId: "1:88357534559:web:e88aa539892ea9b348d4ea",
+    measurementId: "G-P9FLW9YKH8"
+  };
 
-    <script type="module" src="script.js"></script>
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>

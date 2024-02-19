@@ -1,23 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
     <link rel="stylesheet" href="./login.css">
-</head>
-<body>
-    <form>
-        <label for="login_user_name">Tên người dùng:</label>
-        <input type="text" id="login_user_name">
-
-        <label for="login_password">Mật khẩu:</label>
-        <input type="password" id="login_password">
-
-        <button type="button" id="login_btn">Đăng Nhập</button>
-        <button type="button" onclick="location.href='./register.html'">Tạo Tài Khoản</button>
-    </form>
-
-    <script type="module" src="./login.js"></script>
-</body>
+  </head>
+  <body>
+    <div class="register" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;width: 400px;">
+      <h1 style="margin-left: 30%;">Register</h1>
+      <input type="text" placeholder="nhập email người chơi 1" id="username_input_register" style="margin-left: 9%;"/>
+      <input type="password" placeholder="nhập mật khẩu người chơi 1 " id="password_input_register" style="margin-left: 9%;">     
+      <input type="text" placeholder="nhập email người chơi 2" id="username1_input_register" style="margin-left: 9%;"/>
+      <input type="password" placeholder="nhập mật khẩu người chơi 2 " id="password1_input_register" style="margin-left: 9%;">
+      <button id="register_btn" style="margin-left: 9%;">Register</button>
+    </div>    
+    <script type="module" src="login.js"></script>
+  </body>
 </html>

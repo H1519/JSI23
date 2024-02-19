@@ -54,8 +54,8 @@ body {
 
 img {
   position: relative;
-  top: -615px;
-  left: 8px;
+  top: -620px;
+  left: 10px;
   z-index: 1;
   margin: 0;
   width: 615px;
@@ -78,7 +78,14 @@ img {
   border-radius: 5px;
   width: 200px;
 }
-
+#reset{
+  z-index: 99;
+  padding: 5px;
+  cursor: pointer;
+  background-color: rgb(164, 12, 12);
+  border-radius: 5px;
+  width: 200px;
+}
 @media (max-width: 1250px) {
   
   #diceCont {

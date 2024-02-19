@@ -27,7 +27,7 @@ body {
  }
  
  input {
-     width: calc(100% - 20px);
+     width: calc(84% - 20px);
      padding: 10px;
      margin-bottom: 16px;
      border: 1px solid #ced4da;
@@ -38,11 +38,11 @@ body {
  button {
      background-color: #007bff;
      color: #ffffff;
-     padding: 12px;
+     padding: 11px;
      border: none;
      border-radius: 4px;
      cursor: pointer;
-     width: 100%;
+     width: 80%;
      transition: background-color 0.3s;
  }
  

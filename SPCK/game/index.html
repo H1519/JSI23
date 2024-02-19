@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js"></script>
+    <script>
+      const firebaseConfig = {
+    apiKey: "AIzaSyDTM43DRmlkEGdyWPgBkRSjWyYfIyF5np0",
+    authDomain: "cuoikhoa-82272.firebaseapp.com",
+    databaseURL: "https://cuoikhoa-82272-default-rtdb.firebaseio.com",
+    projectId: "cuoikhoa-82272",
+    storageBucket: "cuoikhoa-82272.appspot.com",
+    messagingSenderId: "88357534559",
+    appId: "1:88357534559:web:e88aa539892ea9b348d4ea",
+    measurementId: "G-P9FLW9YKH8"
+  };
+  firebase.initializeApp(firebaseConfig);
+  </script>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,14 +29,27 @@
 
     <h1>Snakes and ladder</h1>
 
-    <div id="diceCont">
-        <p id="tog">Red's Turn : </p>
-        <p id="dice">0</p>
-        <button id="diceBtn">ROLL</button>
+    <div id="diceCont" style="margin-left: 37%; background-color: bisque;width: 300px;height: 350px;">
+        <p id="tog" style="display: none;">Player1's Turn : </p>
+        <p id="dice"style="display: none;">0</p>
+        <button id="diceBtn"style="display: none;">ROLL</button>
+        <button id="reset" style="display: none;">Reset</button>
+        <h2>Login</h2>
+  <input type="email" id="email1" placeholder="Email 1"><br>
+  <input type="password" id="password1" placeholder="Password 1"><br>
+  <input type="email" id="email2" placeholder="Email 2"><br>
+  <input type="password" id="password2" placeholder="Password 2"><br>
+  <button id="compareBtn">Compare</button>
+        <div id="red" style="display: none;">
+            <h6>Số lần Roll của Player1:</h6>
+        </div>
+        <div id="yellow" style="display: none;">
+            <h6>Số lần Roll của Player2:</h6>
+        </div>
     </div>
 
 
-    <div class="cont">
+    <div class="cont" style="display: none;">
 
 
         <div class="box" id="b100">
@@ -231,11 +259,9 @@
         </div>
     </div>
 
-    <img src="./snake ladder (1).png" alt="">
+    <img src="./snake ladder (1).png" alt="" style="width: 620px; height: 620px;display: none;">
 
-
-
+    <script src="./firebase.js"></script>
+    <script src="./app.js"></script>
 </body>
-<script src="app.js"></script>
-
 </html>
