@@ -29,6 +29,8 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const auth = getAuth();
 
+
+let score = document.getElementById("score")
 let password_register = document.getElementById("password_input_register");
 let password1_register = document.getElementById("password1_input_register");
 let username_register = document.getElementById("username_input_register");

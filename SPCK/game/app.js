@@ -1,49 +1,55 @@
-document.addEventListener("DOMContentLoaded", function() {
-const compareBtn = document.getElementById("compareBtn");
-    // Gọi hàm hoặc sự kiện từ firebase.js để kích hoạt sau khi Firebase đã tải xong
-    compareBtn.addEventListener("click", compareCredentials);
-    
-    // Thêm các sự kiện hoặc hàm khác tại đây nếu cần
-});
-const auth = firebase.auth();
-const database = firebase.database();
-compareBtn.addEventListener("click", compareCredentials);
-function compareCredentials() {
-  const email1 = document.getElementById("email1").value;
-  const password1 = document.getElementById("password1").value;
-  const email2 = document.getElementById("email2").value;
-  const password2 = document.getElementById("password2").value;
-  const cont = document.getElementsByClassName("cont")
-  cont.style.display="block";
-  firebase
-  .auth()
-  .signInWithEmailAndPassword(email1, password1)
-  .then((userCredential) => {
-      console.log("User 1 authenticated");
-      const dbRef = firebase.database().ref();
-      dbRef
-      .child("users")
-      .once("value")
-      .then((snapshot) => {
-          const userData = snapshot.val();
-          if (userData.email === email2 && userData.password === password2) {
-           
-            console.log("Đăng nhập thành công");
-            document.getElementById("email1").style.display = "none";
-            document.getElementById("email2").style.display = "none";
-            document.getElementById("password1").style.display = "none";
-            document.getElementById("password2").style.display = "none";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js";
+import {
+  getStorage,
+  uploadBytes,
+  getDownloadURL,
+  ref as dbRefImage,
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js";
+import {
+  get,
+  getDatabase,
+  set,
+  ref,
+  onValue,
+  update,
+  remove,
+  push,
+  child,
+} from "https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+  } from "https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyDTM43DRmlkEGdyWPgBkRSjWyYfIyF5np0",
+    authDomain: "cuoikhoa-82272.firebaseapp.com",
+    projectId: "cuoikhoa-82272",
+    storageBucket: "cuoikhoa-82272.appspot.com",
+    messagingSenderId: "88357534559",
+    appId: "1:88357534559:web:e88aa539892ea9b348d4ea",
+    measurementId: "G-P9FLW9YKH8"
+};
+
+// Initialize Firebase
             const app = initializeApp(firebaseConfig);
+            const storage = getStorage(app);
             const database = getDatabase(app);
             const auth = getAuth();
             let tog = 1;
-            document.getElementById("tog").style.display = "block";
             let n = 0;
             let nn = 0;
             let nnn = 0;
             let p1sum = 0;
             let p2sum = 0;
-            let soccer =0;
+            let roll =0;
+            let hight_roll = 999;
             let reset = document.getElementById("reset");
             let username;
             let username1;
@@ -189,31 +195,44 @@ function compareCredentials() {
                     if (player == 'p1') {
                         if(nn=nnn){
                     alert("Player1 Win !!")
-                    let P1= prompt("Nhập tên Player 1");
-                    let P2= prompt("Nhập tên Player 2");
-                    let username = P1;
-                    let username1 = P2;
+                    document.getElementById("box1").style.display = "block";
+                    let username = email1.value;
+                    let username1 = email2.value;
+                    roll: nnn.value;
+                    if (hight_roll>roll){
+                        hight_roll =roll;    
+                    }
+                    if(hight_roll<=roll){
+                        hight_roll=hight_roll;
+                    }
                     update(ref(database, "users/" + username), {
-                      soccer: nnn.value,
-                    });
-                  alert(errorMess);
+                        hight_roll: hight_roll.value,
+                   });
+                   reset.addEventListener("click",function(){
+                    location.reload();
+                   })
                 };
                     }
                     else if (player == 'p2') {
-                      alert("P2 Win !!")
-                      let P1= prompt("Nhập tên Player 1");
-                      let P2= prompt("Nhập tên Player 2");
-                      let username = P1;
-                      let username1 = P2;
-                      update(ref(database, "users/" + username), {
-                        soccer: nnn.value,
-                      });
-                    alert(errorMess);
+                      alert("Player2 Win !!")
+                      let username = email1.value;
+                      let username1 = email2.value;
+                      roll: nnn.value;
+                      document.getElementById("box1").style.display = "block";
+                    if (hight_roll>roll)
+                    {
+                        hight_roll=roll;    
+                    }
+                    if(hight_roll<=roll){
+                        hight_roll=hight_roll;
+                    }
+                    update(ref(database, "users/" + username), {
+                        hight_roll: hight_roll.value,
+                   });
+                   reset.addEventListener("click",function(){
+                    location.reload();
+                   })
                   };
-                    reset.style.display = "block";
-                    reset.addEventListener("click", function(){
-                        location.reload();
-                    });
                 }
                 else {
             
@@ -266,30 +285,16 @@ function compareCredentials() {
                 if (n === 2) {
                     nn = nn + 1;
                     n = 0;
-                    yellow.innerText = nnn;
+                    yellow.innerText = nn;
                 }
             
                 if (tog % 2 !== 0) {
-                    document.getElementById('tog').innerText = "Yellow's Turn : ";
-                    play('p1', 'p1sum', 0, num, nn);
+                    document.getElementById('tog').innerText = "Player2 Turn : ";
+                    play('p1', 'p1sum', 0, num, nnn);
                 } else {
-                    document.getElementById('tog').innerText = "Red's Turn : ";
+                    document.getElementById('tog').innerText = "Player1 Turn : ";
                     play('p2', 'p2sum', 55, num, nn);
                 }
             
                 tog = tog + 1;
             });
-
-            
-          } else {
-            console.log("sai password or email");
-          }
-        })
-        .catch((error) => {
-          console.error("Error reading data:", error);
-        });
-    })
-    .catch((error) => {
-      console.error("Error authenticating user 1:", error);
-    });
-}

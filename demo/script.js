@@ -1,30 +1,32 @@
-document.getElementById("compareBtn").addEventListener("click", compareCredentials);
-
-function compareCredentials() {
-  const email1 = document.getElementById("email1").value;
-  const password1 = document.getElementById("password1").value;
-  const email2 = document.getElementById("email2").value;
-  const password2 = document.getElementById("password2").value;
-
-  firebase.auth().signInWithEmailAndPassword(email1, password1)
-    .then((userCredential) => {
-      console.log("User 1 authenticated");
-      // Now compare email2 and password2 with the values in real-time database
-      const dbRef = firebase.database().ref();
-      dbRef.child("users").once("value")
-        .then((snapshot) => {
-          const userData = snapshot.val();
-          if (userData.email === email2 && userData.password === password2) {
-            console.log("User 2 credentials match the database");
-          } else {
-            console.log("User 2 credentials do not match the database");
-          }
-        })
-        .catch((error) => {
-          console.error("Error reading data:", error);
+login_btn.addEventListener("click", function () {
+    let username = username_login.value;
+    let password = password_login.value;
+  
+    signInWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        let date = new Date();
+        update(ref(database, "user/" + user.uid), {
+          lastLogin: date,
         });
-    })
-    .catch((error) => {
-      console.error("Error authenticating user 1:", error);
-    });
-}
+        localStorage.setItem("name", username);
+        alert("Đăng nhập thành công");
+      })
+      .catch((err) => {
+        const errorCode = err.code;
+        const errorMess = err.message;
+  
+        alert(errorMess);
+      });
+  });
+   //   Đoạn này anh lưu 2 thông tin quan trong nhất của 1 user khi đăng nhập thành công đó là username và user uid
+   localStorage.setItem("username_login", username);
+   localStorage.setItem("userUID_login", user.uid);
+
+   // Sau khi đăng nhập thành công xong có thể sử chuyển đối sang 1 trang khác
+   alert("Đăng nhập thành công");
+
+   setTimeout(() => {
+     // ở đây a chuyển sang trang home để làm mẫu CRUD cho các em
+     window.location.href = "./home.html";
+   }, 2000);
