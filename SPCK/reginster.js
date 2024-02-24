@@ -43,7 +43,7 @@ register_btn.addEventListener("click", function () {
   let username1 = username1_register.value;
   let password = password_register.value;
   let password1 = password1_register.value;
-
+  let hight_roll = 999;
 
   createUserWithEmailAndPassword(auth, username, password,username1,password1)
     .then((userCredential) => {
@@ -53,8 +53,12 @@ register_btn.addEventListener("click", function () {
         password: password,
         username1: username1,
         password1: password1,
+        hight_roll: hight_roll,
       });
     alert("Tạo tài khoản thành công");
+    setTimeout(() => {
+      window.location.href = "./login.html";
+    }, 2000);
     })
     .catch((err) => {
       const errorCode = err.code;

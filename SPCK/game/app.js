@@ -42,6 +42,7 @@ const firebaseConfig = {
             const storage = getStorage(app);
             const database = getDatabase(app);
             const auth = getAuth();
+            var data = localStorage.getItem('usersUID_login1');
             let tog = 1;
             let n = 0;
             let nn = 0;
@@ -50,9 +51,8 @@ const firebaseConfig = {
             let p2sum = 0;
             let roll =0;
             let hight_roll = 999;
+            let best_roll = 99;
             let reset = document.getElementById("reset");
-            let username;
-            let username1;
             let red = document.createElement("h7");
             let yellow = document.createElement("h7");
             let red1=document.getElementById("red");
@@ -195,17 +195,15 @@ const firebaseConfig = {
                     if (player == 'p1') {
                         if(nn=nnn){
                     alert("Player1 Win !!")
-                    document.getElementById("box1").style.display = "block";
-                    let username = email1.value;
-                    let username1 = email2.value;
-                    roll: nnn.value;
+                    roll = nnn.value;
                     if (hight_roll>roll){
                         hight_roll =roll;    
                     }
                     if(hight_roll<=roll){
                         hight_roll=hight_roll;
                     }
-                    update(ref(database, "users/" + username), {
+                   reset.style.display= "block";
+                    update(ref(database, "user/" + data), {
                         hight_roll: hight_roll.value,
                    });
                    reset.addEventListener("click",function(){
@@ -215,20 +213,18 @@ const firebaseConfig = {
                     }
                     else if (player == 'p2') {
                       alert("Player2 Win !!")
-                      let username = email1.value;
-                      let username1 = email2.value;
-                      roll: nnn.value;
-                      document.getElementById("box1").style.display = "block";
+                      roll= nnn.value;
                     if (hight_roll>roll)
                     {
-                        hight_roll=roll;    
+                        best_roll=roll;    
                     }
                     if(hight_roll<=roll){
-                        hight_roll=hight_roll;
+                        best_roll_roll=hight_roll;
                     }
-                    update(ref(database, "users/" + username), {
-                        hight_roll: hight_roll.value,
+                    update(ref(database, "user/" + data), {
+                        hight_roll: best_roll,
                    });
+                   reset.style.display= "block";
                    reset.addEventListener("click",function(){
                     location.reload();
                    })
